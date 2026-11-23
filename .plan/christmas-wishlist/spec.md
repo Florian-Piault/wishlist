@@ -147,7 +147,7 @@ Variante « B · Catalogue » du [prototype](prototypes/style-visuel/README.md),
 ### Hébergement
 
 - GitHub Pages, depuis un dépôt public nommé `wishlist`, à l'adresse `https://<user>.github.io/wishlist`, sans domaine personnalisé.
-- Configuration Astro : `site` = `https://<user>.github.io`, `base` = `/wishlist`. Tous les liens internes (ancres, polices, images, favicon) passent par ce `base`.
+- Configuration Astro : `site` = `https://<user>.github.io`, `base` = `/wishlist`. Astro refuse `<user>` (URL invalide) : `astro.config.mjs` porte le placeholder `https://user.github.io` jusqu'à ce que le vrai nom soit renseigné. Tous les liens internes (ancres, polices, images, favicon) passent par ce `base`.
 - Non-indexation : le layout porte une meta `robots` `noindex, nofollow`, et le site n'a pas de sitemap. Un `robots.txt` sous `/wishlist/` serait sans effet.
 - Le VPS de Hestia n'est pas utilisé.
 

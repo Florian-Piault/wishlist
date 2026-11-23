@@ -5,7 +5,7 @@
 ## Principes
 
 - Chaque lot laisse une application qui démarre (`pnpm dev`) et apporte quelque chose d'utilisable ou de vérifiable.
-- **Commande de vérification** : un lot est terminé quand `pnpm check` passe en local. Ce script, posé en L0, enchaîne `prettier --check .`, `astro check` et `astro build`, exactement comme la CI.
+- **Commande de vérification** : un lot est terminé quand `pnpm check` passe en local. Ce script, posé en L0, enchaîne `prettier --check .`, `astro check` et `astro build`, exactement comme la CI. Le dossier `.plan/` est hors Prettier (`.prettierignore`).
 - **Seams de test** : aucun test automatisé (choix de la spec). Les garde-fous sont dans la chaîne de build : le schéma Zod refuse une donnée invalide, le helper `image()` une image manquante, `astro check` les types, Prettier le formatage. Une règle de données se prouve donc en cassant volontairement `src/data/wishlist.yaml` et en constatant l'échec de `pnpm check`, puis en rétablissant le fichier. Le rendu se vérifie à la main au dev server, en clair et en sombre, en largeur mobile et bureau.
 - **Règles avant écrans** : le schéma, les catégories (ordre, libellés, icônes), le tri, le prix effectif et la synthèse sont posés en L1, dans `src/content.config.ts` et `src/lib/`, avant la page qui les affiche. Les lots d'écran ne recalculent rien : ils lisent les fonctions de `src/lib/wishlist.ts`.
 - **Fichiers disjoints** : le workflow (L2) vit dans `.github/`, le partage (L5) dans `src/components/ShareMeta.astro` et `public/`, les règles (L1) dans `src/content.config.ts`, `src/data/` et `src/lib/`. Le seul point chaud est `src/layouts/Layout.astro` : L3 y ajoute les polices et la feuille de style, L5 une ligne `<ShareMeta />`. Ces deux modifications restent courtes.
