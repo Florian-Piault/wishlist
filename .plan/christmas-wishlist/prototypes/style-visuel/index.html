@@ -1,0 +1,304 @@
+<!doctype html>
+<!--
+  PROTOTYPE jetable : style visuel de la wishlist (ticket 05).
+  Trois variantes structurellement différentes, switchables via ?variant=A|B|C
+  et ?theme=auto|light|dark, depuis la barre flottante ou les flèches ← →.
+  Données factices conformes au schéma du ticket 03, tri catégorie → priorité → prix.
+  Images « produit » = dessins SVG factices ; repli = icône Lucide par catégorie (ticket 04).
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototype – style wishlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0}
+body{-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:96px}
+img{display:block;max-width:100%}
+a{color:inherit}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* =================== A — Carte de vœux =================== */
+.vA{--bg:#F6F0E4;--paper:#FFFDF8;--ink:#2A2620;--muted:#6F675B;--fir:#1F4D3A;--red:#A3242F;--gold:#B08737;--line:#E6DCC8;--ph:#EDE5D3;--ph-ink:#1F4D3A;
+  background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+[data-theme=dark] .vA{--bg:#101C16;--paper:#18271F;--ink:#EFE8D8;--muted:#A9A190;--fir:#9CC5AE;--red:#E0727A;--gold:#D4B06A;--line:#2A3B31;--ph:#21342A;--ph-ink:#9CC5AE}
+.vA .wrap{max-width:1080px;margin:0 auto;padding:40px 16px}
+.vA header{text-align:center;margin-bottom:40px}
+.vA h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2rem,7vw,3.25rem);color:var(--fir);margin:0;letter-spacing:-.01em}
+.vA .orn{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);margin:14px auto;max-width:220px}
+.vA .orn::before,.vA .orn::after{content:"";flex:1;height:1px;background:currentColor;opacity:.7}
+.vA header p{color:var(--muted);margin:0 auto;max-width:34em;line-height:1.5}
+.vA section{margin-top:36px}
+.vA h2{font-family:Fraunces,Georgia,serif;font-weight:400;font-size:1.4rem;color:var(--fir);display:flex;align-items:center;gap:10px;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.vA h2 svg{color:var(--gold)}
+.vA .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:720px){.vA .grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media(min-width:1000px){.vA .grid{grid-template-columns:repeat(4,1fr)}}
+.vA .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;position:relative;transition:transform .15s,box-shadow .15s}
+.vA .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgb(0 0 0 / .08)}
+.vA .media{aspect-ratio:1;background:#fff;display:grid;place-items:center;padding:12px;border-bottom:1px solid var(--line)}
+[data-theme=dark] .vA .media{background:#F4EFE4}
+.vA .media img{width:100%;height:100%;object-fit:contain}
+.vA .media.ph{background:var(--ph);color:var(--ph-ink);font-size:44px}
+.vA .badge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:99px;letter-spacing:.02em}
+[data-theme=dark] .vA .badge{color:#1a1a1a}
+.vA .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.vA .t{font-family:Fraunces,Georgia,serif;font-size:1rem;line-height:1.25}
+.vA .n{font-size:.8rem;color:var(--muted);line-height:1.35}
+.vA .p{margin-top:auto;padding-top:6px;font-weight:600;color:var(--fir);display:flex;justify-content:space-between;align-items:center}
+.vA .p svg{color:var(--muted)}
+.vA footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:48px}
+
+/* =================== B — Catalogue =================== */
+.vB{--bg:#FBFAF7;--ink:#1C1B19;--muted:#76726A;--red:#B3262E;--fir:#24563F;--line:#E7E3DA;--ph:#F0EDE6;--chip:#F1EEE7;
+  background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+[data-theme=dark] .vB{--bg:#141413;--ink:#ECEAE4;--muted:#99958C;--red:#E86A6F;--fir:#86C3A1;--line:#2A2926;--ph:#1F1E1C;--chip:#22211E}
+.vB .wrap{max-width:760px;margin:0 auto;padding:40px 16px 0}
+.vB h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,11vw,4.5rem);line-height:.95;margin:0;letter-spacing:-.02em}
+.vB h1 em{color:var(--red)}
+.vB .lede{color:var(--muted);margin:12px 0 0;font-size:.95rem}
+.vB nav{position:sticky;top:0;z-index:5;background:var(--bg);margin:24px -16px 0;padding:10px 16px;display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.vB nav a{flex:none;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:99px;background:var(--chip);white-space:nowrap}
+.vB nav a span{color:var(--muted);margin-left:4px}
+.vB section{padding-top:28px;scroll-margin-top:52px}
+.vB h2{display:flex;align-items:baseline;gap:10px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:1.9rem;margin:0 0 4px}
+.vB h2 small{font-family:Inter,sans-serif;font-size:.75rem;color:var(--red);font-weight:600;letter-spacing:.08em}
+.vB ul{list-style:none;margin:0;padding:0}
+.vB li+li{border-top:1px solid var(--line)}
+.vB .row{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;text-decoration:none}
+@media(min-width:600px){.vB .row{grid-template-columns:88px 1fr auto}}
+.vB .row:hover .t{text-decoration:underline;text-underline-offset:3px}
+.vB .th{aspect-ratio:1;border-radius:6px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;padding:4px;overflow:hidden}
+.vB .th img{width:100%;height:100%;object-fit:contain}
+.vB .th.ph{background:var(--ph);color:var(--muted);font-size:24px;border-color:transparent}
+.vB .t{font-weight:500;line-height:1.3}
+.vB .k{font-size:.7rem;font-weight:600;color:var(--red);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:4px;margin-bottom:2px}
+.vB .n{font-size:.82rem;color:var(--muted);margin-top:2px;line-height:1.35}
+.vB .p{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:var(--fir);white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.vB .p svg{color:var(--muted);font-size:.95rem}
+.vB footer{color:var(--muted);font-size:.8rem;padding:40px 0;border-top:1px solid var(--line);margin-top:24px}
+
+/* =================== C — Nuit d'hiver =================== */
+.vC{--bg:#0D241D;--card:#123128;--ink:#F3EEE2;--muted:#A8B8AE;--gold:#D9B56C;--red:#D2524A;--line:#1F4337;--ph:#173B31;--btn:#D9B56C;--btn-ink:#14231D;--snow:rgb(255 255 255 / .07);
+  background:var(--bg);color:var(--ink);font-family:Outfit,system-ui,sans-serif;min-height:100vh;
+  background-image:radial-gradient(var(--snow) 1.2px,transparent 1.6px),radial-gradient(var(--snow) 1px,transparent 1.4px);background-size:46px 46px,29px 29px;background-position:0 0,13px 19px}
+[data-theme=light] .vC{--bg:#F3F5F1;--card:#FFFFFF;--ink:#13302A;--muted:#5D7068;--gold:#A57C2C;--red:#B2352E;--line:#DDE4DE;--ph:#E5ECE6;--btn:#13302A;--btn-ink:#F3EEE2;--snow:rgb(19 48 42 / .06)}
+.vC .wrap{max-width:960px;margin:0 auto;padding:56px 16px}
+.vC header{margin-bottom:28px}
+.vC .eyebrow{color:var(--gold);font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+.vC h1{font-weight:300;font-size:clamp(2.4rem,10vw,4rem);margin:6px 0 10px;line-height:1;letter-spacing:-.02em}
+.vC h1 b{font-weight:700}
+.vC header p{color:var(--muted);margin:0;max-width:30em;line-height:1.5}
+.vC .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 8px}
+.vC .tabs a{text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-size:.85rem;padding:7px 12px;border:1px solid var(--line);border-radius:10px;color:var(--muted)}
+.vC .tabs a svg{color:var(--gold)}
+.vC section{margin-top:40px;scroll-margin-top:16px}
+.vC h2{font-size:.85rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin:0 0 16px}
+.vC h2::after{content:"";flex:1;height:1px;background:var(--line)}
+.vC .grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:640px){.vC .grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:920px){.vC .grid{grid-template-columns:repeat(3,1fr)}}
+.vC .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;flex-direction:column;position:relative}
+.vC .card.hi{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.vC .media{aspect-ratio:1;border-radius:12px;background:#FBFAF6;display:grid;place-items:center;padding:18px}
+.vC .media img{width:100%;height:100%;object-fit:contain}
+.vC .media.ph{background:var(--ph);color:var(--gold);font-size:64px}
+.vC .rib{position:absolute;top:22px;right:0;background:var(--red);color:#fff;font-size:.72rem;font-weight:600;padding:5px 10px 5px 12px;border-radius:6px 0 0 6px;letter-spacing:.04em;display:flex;align-items:center;gap:5px}
+.vC .body{padding:14px 4px 4px;display:flex;flex-direction:column;gap:6px;flex:1}
+.vC .t{font-size:1.2rem;font-weight:500;line-height:1.25}
+.vC .n{color:var(--muted);font-size:.9rem;line-height:1.4}
+.vC .p{font-size:1.6rem;font-weight:600;color:var(--gold);margin-top:auto;padding-top:8px;font-variant-numeric:tabular-nums}
+.vC .p small{font-size:.8rem;font-weight:400;color:var(--muted);margin-left:4px}
+.vC .btn{margin-top:10px;display:flex;justify-content:center;align-items:center;gap:8px;background:var(--btn);color:var(--btn-ink);text-decoration:none;font-weight:600;padding:12px;border-radius:12px}
+.vC footer{color:var(--muted);font-size:.85rem;margin-top:56px;text-align:center}
+
+/* =================== Switcher (hors design) =================== */
+#proto-bar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:4px;background:#0A0A0A;color:#fff;border-radius:99px;padding:6px;font:500 13px/1 system-ui,sans-serif;box-shadow:0 8px 28px rgb(0 0 0 / .35),0 0 0 1px rgb(255 255 255 / .12);white-space:nowrap}
+#proto-bar button{all:unset;cursor:pointer;padding:8px 12px;border-radius:99px}
+#proto-bar button:hover{background:#262626}
+#proto-bar .lbl{padding:0 8px;min-width:150px;text-align:center}
+#proto-bar .sep{width:1px;height:20px;background:#333;margin:0 2px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="proto-bar" role="toolbar" aria-label="Prototype">
+  <button id="prev" aria-label="Variante précédente">←</button>
+  <span class="lbl" id="lbl"></span>
+  <button id="next" aria-label="Variante suivante">→</button>
+  <span class="sep"></span>
+  <button id="theme"></button>
+</div>
+
+<script>
+/* ---------- Icônes Lucide (inline) ---------- */
+const ICONS = {
+  book:'<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/>',
+  'gamepad-2':'<line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/>',
+  monitor:'<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  house:'<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  shirt:'<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>',
+  gift:'<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/>',
+  'arrow-up-right':'<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+  'external-link':'<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  star:'<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>',
+  sparkle:'<path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/>',
+};
+const icon = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+
+/* ---------- Images produit factices (SVG, ratios variés pour tester contain) ---------- */
+const svgUri = (w,h,body) => 'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">${body}</svg>`);
+const IMG = {
+  livre: svgUri(300,440,'<rect x="10" y="0" width="290" height="440" rx="6" fill="#5B2A1E"/><rect x="0" y="0" width="28" height="440" rx="4" fill="#3E1B12"/><rect x="60" y="70" width="200" height="2" fill="#D6B26A"/><text x="160" y="150" font-family="Georgia" font-size="30" fill="#D6B26A" text-anchor="middle">LE SEIGNEUR</text><text x="160" y="190" font-family="Georgia" font-size="30" fill="#D6B26A" text-anchor="middle">DES ANNEAUX</text><circle cx="160" cy="290" r="44" fill="none" stroke="#D6B26A" stroke-width="3"/><rect x="60" y="370" width="200" height="2" fill="#D6B26A"/>'),
+  jeu: svgUri(480,320,'<rect x="0" y="40" width="480" height="280" rx="8" fill="#2F6E5E"/><rect x="0" y="40" width="480" height="60" fill="#255A4C"/><path d="M40 300 L140 170 L210 240 L300 130 L440 300Z" fill="#9CC9A4"/><circle cx="380" cy="150" r="26" fill="#F1D38A"/><text x="240" y="82" font-family="Helvetica" font-weight="700" font-size="34" fill="#fff" text-anchor="middle">CASCADIA</text>'),
+  casque: svgUri(420,420,'<path d="M70 250 C70 110 350 110 350 250" fill="none" stroke="#2B2B2B" stroke-width="26" stroke-linecap="round"/><rect x="40" y="220" width="80" height="140" rx="36" fill="#3A3A3A"/><rect x="300" y="220" width="80" height="140" rx="36" fill="#3A3A3A"/><rect x="58" y="245" width="44" height="90" rx="20" fill="#555"/><rect x="318" y="245" width="44" height="90" rx="20" fill="#555"/>'),
+  manette: svgUri(460,300,'<path d="M110 40 H350 C420 40 450 90 455 160 C460 240 440 290 400 290 C360 290 340 230 300 220 H160 C120 230 100 290 60 290 C20 290 0 240 5 160 C10 90 40 40 110 40Z" fill="#6B6F7A"/><circle cx="130" cy="140" r="34" fill="#3B3E45"/><circle cx="330" cy="120" r="14" fill="#C84A3F"/><circle cx="360" cy="150" r="14" fill="#3F8EC8"/><circle cx="300" cy="150" r="14" fill="#E3B341"/><circle cx="330" cy="180" r="14" fill="#4CA65A"/>'),
+  moulin: svgUri(260,460,'<rect x="60" y="140" width="140" height="300" rx="10" fill="#8A5A36"/><rect x="50" y="120" width="160" height="30" rx="6" fill="#B9B9B9"/><path d="M80 120 C80 60 180 60 180 120Z" fill="#CFCFCF"/><line x1="130" y1="60" x2="130" y2="20" stroke="#888" stroke-width="10"/><line x1="130" y1="20" x2="230" y2="20" stroke="#888" stroke-width="10" stroke-linecap="round"/><circle cx="232" cy="20" r="14" fill="#5A3A22"/>'),
+};
+
+/* ---------- Données factices (forme du wishlist.yaml) ---------- */
+const CATS = [
+  {key:'books',label:'Livres',icon:'book'},
+  {key:'games',label:'Jeux',icon:'gamepad-2'},
+  {key:'tech',label:'High-tech',icon:'monitor'},
+  {key:'home',label:'Maison',icon:'house'},
+  {key:'clothing',label:'Vêtements',icon:'shirt'},
+  {key:'misc',label:'Divers',icon:'gift'},
+];
+const ITEMS = {
+  'projet-hail-mary':{title:'Projet Hail Mary, Andy Weir',url:'https://example.com',price:9.9,category:'books',note:'En poche, ça me va très bien.'},
+  'seigneur-anneaux-illustre':{title:'Le Seigneur des anneaux, édition illustrée par Alan Lee',url:'https://example.com',price:45,category:'books',priority:'high',image:IMG.livre,note:'Traduction de Daniel Lauzon de préférence.'},
+  'cascadia':{title:'Cascadia',url:'https://example.com',price:39,category:'games',image:IMG.jeu},
+  'manette-8bitdo':{title:'Manette 8BitDo Ultimate Bluetooth',url:'https://example.com',price:69.99,category:'games',image:IMG.manette},
+  'casque-sony':{title:'Casque Sony WH-1000XM5',url:'https://example.com',range:{min:300,max:380},category:'tech',priority:'high',image:IMG.casque,note:'Noir ou argent, peu importe.'},
+  'kobo-clara':{title:'Liseuse Kobo Clara BW',url:'https://example.com',price:149,category:'tech'},
+  'moulin-cafe':{title:'Moulin à café manuel',url:'https://example.com',range:{min:60,max:90},category:'home',image:IMG.moulin},
+  'plaid-laine':{title:'Plaid en laine',url:'https://example.com',price:79,category:'home',note:'Teinte vert ou écru.'},
+  'pull-merinos':{title:'Pull col rond en laine mérinos',url:'https://example.com',price:89,category:'clothing',priority:'high',note:'Taille M, bleu nuit ou vert sapin.'},
+  'atelier-poterie':{title:'Bon pour un atelier poterie',url:'https://example.com',range:{min:50,max:80},category:'misc',note:'N\'importe quel atelier près de chez moi, une demi-journée suffit largement.'},
+  'chaussettes':{title:'Chaussettes rigolotes',url:'https://example.com',price:12,category:'misc'},
+};
+
+/* ---------- Tri : catégorie (ordre de l'enum) → high d'abord → prix effectif → ordre du fichier ---------- */
+const eff = i => i.price ?? i.range.min;
+const entries = Object.entries(ITEMS).map(([slug,it],idx)=>({slug,idx,...it}));
+const GROUPS = CATS.map(c=>({...c,items:entries.filter(i=>i.category===c.key).sort((a,b)=>
+  ((b.priority==='high')-(a.priority==='high')) || (eff(a)-eff(b)) || (a.idx-b.idx))})).filter(g=>g.items.length);
+const num = n => new Intl.NumberFormat('fr-FR',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2}).format(n);
+const price = i => i.price!=null ? `${num(i.price)} €` : `${num(i.range.min)} – ${num(i.range.max)} €`;
+const media = (i,cls,iconCat) => i.image
+  ? `<div class="${cls}"><img src="${i.image}" alt="${i.title}" loading="lazy"></div>`
+  : `<div class="${cls} ph">${icon(CATS.find(c=>c.key===i.category).icon)}</div>`;
+const allPrices = entries.map(eff);
+
+/* ---------- Variante A : carte de vœux (grille 2 colonnes, cartes papier) ---------- */
+function VariantA(){
+  return `<div class="vA"><div class="wrap">
+    <header>
+      <h1>Ma liste de Noël</h1>
+      <div class="orn">${icon('sparkle')}</div>
+      <p>Quelques idées si vous êtes en panne d'inspiration. Les prix sont indicatifs, et rien ne vous oblige à piocher ici.</p>
+    </header>
+    ${GROUPS.map(g=>`<section id="${g.key}">
+      <h2>${icon(g.icon)}${g.label}</h2>
+      <div class="grid">${g.items.map(i=>`
+        <a class="card" href="${i.url}" target="_blank" rel="noopener">
+          ${media(i,'media')}
+          ${i.priority==='high'?'<span class="badge">très envie</span>':''}
+          <div class="body">
+            <div class="t">${i.title}</div>
+            ${i.note?`<div class="n">${i.note}</div>`:''}
+            <div class="p">${price(i)}${icon('arrow-up-right')}</div>
+          </div>
+        </a>`).join('')}</div>
+    </section>`).join('')}
+    <footer>Joyeux Noël ✶</footer>
+  </div></div>`;
+}
+
+/* ---------- Variante B : catalogue (liste dense, nav de catégories collante) ---------- */
+function VariantB(){
+  return `<div class="vB"><div class="wrap">
+    <h1>Liste de <em>Noël</em></h1>
+    <p class="lede">${entries.length} idées, de ${num(Math.min(...allPrices))} à ${num(Math.max(...entries.map(i=>i.price??i.range.max)))} €. Prix indicatifs.</p>
+    <nav>${GROUPS.map(g=>`<a href="#${g.key}">${g.label}<span>${g.items.length}</span></a>`).join('')}</nav>
+    ${GROUPS.map((g,gi)=>`<section id="${g.key}">
+      <h2><small>${String(gi+1).padStart(2,'0')}</small>${g.label}</h2>
+      <ul>${g.items.map(i=>`<li>
+        <a class="row" href="${i.url}" target="_blank" rel="noopener">
+          ${media(i,'th')}
+          <div>
+            ${i.priority==='high'?`<div class="k">${icon('star')}Très envie</div>`:''}
+            <div class="t">${i.title}</div>
+            ${i.note?`<div class="n">${i.note}</div>`:''}
+          </div>
+          <div class="p">${price(i)}${icon('arrow-up-right')}</div>
+        </a></li>`).join('')}</ul>
+    </section>`).join('')}
+    <footer>Joyeux Noël.</footer>
+  </div></div>`;
+}
+
+/* ---------- Variante C : nuit d'hiver (sombre d'abord, grandes cartes, bouton explicite) ---------- */
+function VariantC(){
+  return `<div class="vC"><div class="wrap">
+    <header>
+      <div class="eyebrow">Idées cadeaux</div>
+      <h1>Ma <b>liste</b> de Noël</h1>
+      <p>Quelques idées si vous êtes en panne d'inspiration. Les prix sont indicatifs.</p>
+    </header>
+    <div class="tabs">${GROUPS.map(g=>`<a href="#${g.key}">${icon(g.icon)}${g.label}</a>`).join('')}</div>
+    ${GROUPS.map(g=>`<section id="${g.key}">
+      <h2>${g.label}</h2>
+      <div class="grid">${g.items.map(i=>`
+        <article class="card ${i.priority==='high'?'hi':''}">
+          ${media(i,'media')}
+          ${i.priority==='high'?`<span class="rib">${icon('star')}Très envie</span>`:''}
+          <div class="body">
+            <div class="t">${i.title}</div>
+            ${i.note?`<div class="n">${i.note}</div>`:''}
+            <div class="p">${price(i)}${i.range&&i.price==null?'<small>environ</small>':''}</div>
+            <a class="btn" href="${i.url}" target="_blank" rel="noopener">Voir chez le marchand ${icon('external-link')}</a>
+          </div>
+        </article>`).join('')}</div>
+    </section>`).join('')}
+    <footer>Joyeux Noël ✶</footer>
+  </div></div>`;
+}
+
+/* ---------- Switcher ---------- */
+const VARIANTS = [['A','Carte de vœux',VariantA],['B','Catalogue',VariantB],['C',"Nuit d'hiver",VariantC]];
+const THEMES = ['auto','light','dark'];
+const THEME_LBL = {auto:'◐ Auto',light:'☀ Clair',dark:'☾ Sombre'};
+const params = new URLSearchParams(location.search);
+let v = Math.max(0, VARIANTS.findIndex(x=>x[0]===(params.get('variant')||'A').toUpperCase()));
+let theme = THEMES.includes(params.get('theme')) ? params.get('theme') : 'auto';
+const mq = matchMedia('(prefers-color-scheme: dark)');
+
+function render(){
+  const [key,name,fn] = VARIANTS[v];
+  document.documentElement.dataset.theme = theme==='auto' ? (mq.matches?'dark':'light') : theme;
+  document.getElementById('app').innerHTML = fn();
+  document.getElementById('lbl').textContent = `${key} · ${name}`;
+  document.getElementById('theme').textContent = THEME_LBL[theme];
+  const p = new URLSearchParams(location.search); p.set('variant',key); p.set('theme',theme);
+  try { history.replaceState(null,'',`?${p}`); } catch {}
+}
+const go = d => { v = (v+d+VARIANTS.length)%VARIANTS.length; render(); };
+document.getElementById('prev').onclick = ()=>go(-1);
+document.getElementById('next').onclick = ()=>go(1);
+document.getElementById('theme').onclick = ()=>{ theme = THEMES[(THEMES.indexOf(theme)+1)%3]; render(); };
+mq.addEventListener('change', render);
+addEventListener('keydown', e=>{
+  if (e.target.closest('input,textarea,[contenteditable]')) return;
+  if (e.key==='ArrowLeft') go(-1); if (e.key==='ArrowRight') go(1);
+});
+render();
+</script>
+</body>
+</html>
