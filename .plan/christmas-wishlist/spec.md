@@ -98,7 +98,7 @@ Un petit site statique en lecture seule, sobre et aux couleurs de Noël, qui pr�
 - Les images sont des fichiers versionnés dans le dépôt, jamais des URL distantes. Le poids des fichiers sources n'est pas limité.
 - Elles sont rendues par le composant `<Picture>` d'Astro : AVIF et WebP avec repli, largeurs d'environ 400 et 800 px, `loading="lazy"`, dimensions explicites.
 - La zone image est carrée, en `object-fit: contain` sur fond blanc, et `alt` reprend le `title` de l'élément.
-- Sans image, on affiche l'icône Lucide de la catégorie, en SVG inline au build : `book`, `gamepad-2`, `monitor`, `home`, `shirt`, `gift`. Elle prend la couleur « secondaire » sur le fond de repli, sans bordure, avec `alt=""`.
+- Sans image, on affiche l'icône Lucide de la catégorie, en SVG inline au build (`@lucide/astro`) : `book`, `gamepad-2`, `monitor`, `house`, `shirt`, `gift`. Lucide a renommé `home` en `house` et ne garde `home` que comme alias, absent des imports par icône : on utilise le nom canonique. Elle prend la couleur « secondaire » sur le fond de repli, sans bordure, et porte `aria-hidden="true"` (un SVG inline n'a pas d'`alt`).
 
 ### Style visuel
 
@@ -112,7 +112,7 @@ Variante « B · Catalogue » du [prototype](prototypes/style-visuel/README.md),
   - pied de page « Joyeux Noël. ».
 - Une ligne par élément, séparée par un filet. Toute la ligne est un lien marchand qui s'ouvre dans un nouvel onglet :
   - vignette carrée à gauche (64 px, 88 px dès 600 px de large) ;
-  - au centre, la mention « ★ Très envie », le titre et la note ;
+  - au centre, la mention « ★ Très envie » (l'étoile est l'icône Lucide `star`, décorative), le titre et la note ;
   - à droite, le prix en chiffres tabulaires vert sapin, avec une flèche ↗ dessous.
 - Palette en jetons CSS ; le mode sombre est automatique via `prefers-color-scheme`.
 
@@ -128,7 +128,7 @@ Variante « B · Catalogue » du [prototype](prototypes/style-visuel/README.md),
   | pastilles de nav | `#F1EEE7` | `#22211E` |
 
 - Le rouge reste un accent (titre, numéros, « très envie ») ; le vert est réservé aux prix.
-- Typographie : Instrument Serif pour les titres, Inter pour le texte, toutes deux auto-hébergées au build et sans appel à Google Fonts au runtime.
+- Typographie : Instrument Serif pour les titres, Inter pour le texte, toutes deux auto-hébergées au build et sans appel à Google Fonts au runtime. Elles viennent des paquets Fontsource (`@fontsource/instrument-serif`, romain et italique, et `@fontsource-variable/inter`, axe `wght`), importés dans le layout : Vite copie les fichiers dans `dist/_astro/` et réécrit leurs URL sous le `base`, sans réseau au build.
 
 ### Partage et favicon
 

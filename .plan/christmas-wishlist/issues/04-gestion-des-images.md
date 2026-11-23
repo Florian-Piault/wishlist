@@ -24,6 +24,6 @@ Les images des éléments sont-elles des URL distantes (celles du marchand) ou d
 
 ### Repli sans image
 
-- Icône Lucide par catégorie, en SVG inline au build (`@lucide/astro` ou `astro-icon`), sur fond doux : `book`, `gamepad-2`, `monitor`, `home`, `shirt`, `gift` (misc).
+- Icône Lucide par catégorie, en SVG inline au build (`@lucide/astro` ou `astro-icon`), sur fond doux : `book`, `gamepad-2`, `monitor`, `house`, `shirt`, `gift` (misc).
 - `alt=""` sur ces visuels (décoratifs).
 - Couleur du fond à fixer avec le [style visuel](05-style-visuel.md).

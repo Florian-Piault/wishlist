@@ -1,7 +1,12 @@
 // Règles de la liste : prix, groupement, tri, synthèse et formatage.
 // Fonctions pures : la page charge la collection et leur passe les éléments.
 import type { CollectionEntry } from "astro:content";
-import { CATEGORIES, CATEGORY_INFO, type Category } from "./categories";
+import {
+  CATEGORIES,
+  CATEGORY_INFO,
+  type Category,
+  type CategoryIconName,
+} from "./categories";
 
 export type WishlistEntry = CollectionEntry<"wishlist">;
 export type Item = WishlistEntry["data"];
@@ -9,7 +14,7 @@ export type Item = WishlistEntry["data"];
 export type CategoryGroup = {
   category: Category;
   label: string;
-  icon: string;
+  icon: CategoryIconName;
   count: number;
   /** Éléments triés : `high` d'abord, puis prix effectif croissant. */
   entries: WishlistEntry[];
@@ -120,4 +125,9 @@ export function formatSummary(summary: Summary): string {
   }
   const ideas = `${summary.count} idée${summary.count > 1 ? "s" : ""}`;
   return `${ideas}, ${formatRange(summary.min, summary.max)}`;
+}
+
+/** Numéro d'une section à partir de sa position (0 → « 01 »). */
+export function formatSectionNumber(position: number): string {
+  return String(position + 1).padStart(2, "0");
 }

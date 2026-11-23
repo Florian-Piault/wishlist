@@ -1,14 +1,11 @@
 ---
-// Page provisoire de L1 : affiche en HTML brut les règles de tri et la
-// synthèse pour les vérifier. Remplacée par le catalogue en L3.
+// Page catalogue : en-tête et synthèse, nav des catégories, une section par
+// groupe. Tri, groupes et synthèse viennent de src/lib/wishlist.ts.
 import { getCollection } from "astro:content";
+import CategoryNav from "../components/CategoryNav.astro";
+import CategorySection from "../components/CategorySection.astro";
 import Layout from "../layouts/Layout.astro";
-import {
-  formatItemPrice,
-  formatSummary,
-  groupByCategory,
-  summarize,
-} from "../lib/wishlist";
+import { formatSummary, groupByCategory, summarize } from "../lib/wishlist";
 
 const entries = await getCollection("wishlist");
 const groups = groupByCategory(entries);
@@ -16,22 +13,19 @@ const summary = formatSummary(summarize(entries));
 ---
 
 <Layout>
-  <h1>Liste de Noël</h1>
-  <p>{summary} · Prix indicatifs</p>
-  {groups.map((group) => (
-    <section id={group.category}>
-      <h2>
-        {group.label} ({group.count})
-      </h2>
-      <ul>
-        {group.entries.map((entry) => (
-          <li id={entry.id}>
-            {entry.data.priority === "high" && "★ Très envie — "}
-            {entry.data.title} — {formatItemPrice(entry.data)}
-            {entry.data.note && <small> ({entry.data.note})</small>}
-          </li>
-        ))}
-      </ul>
-    </section>
-  ))}
+  <div class="wrap">
+    <header>
+      <h1 class="site-title">
+        Liste de <em>Noël</em>
+      </h1>
+      <p class="lede">{summary} · Prix indicatifs</p>
+    </header>
+    <CategoryNav groups={groups} />
+    <main>
+      {groups.map((group, position) => (
+        <CategorySection group={group} position={position} />
+      ))}
+    </main>
+    <footer class="site-footer">Joyeux Noël.</footer>
+  </div>
 </Layout>

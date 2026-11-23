@@ -24,6 +24,8 @@ Le statut de `deploy-pages` fait foi, et le run affiche l'URL publiée. Pas de r
 - `src/data/wishlist.yaml` (créé en L1) : la liste, seule source de données.
 - `src/content.config.ts` (créé en L1) : schéma Zod de la collection.
 - `src/lib/` (créé en L1) : règles de catégories, tri, prix et synthèse.
+- `src/lib/paths.ts` : liens internes (ancres) construits depuis le `base`.
+- `src/styles/global.css` : jetons de couleur (clair et sombre), familles de polices et mise en page commune.
 - `src/layouts/`, `src/components/`, `src/pages/` : rendu.
 - `astro.config.mjs` : seul endroit qui porte le nom d'utilisateur GitHub (`site`).
 
