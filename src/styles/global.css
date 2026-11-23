@@ -15,6 +15,9 @@
   --color-line: #e7e3da;
   --color-placeholder: #f0ede6;
   --color-chip: #f1eee7;
+  /* Fond des photos produit : blanc dans les deux modes (non redéfini en
+     sombre), pour que le détourage des fiches marchandes reste invisible. */
+  --color-image-bg: #ffffff;
 
   --font-serif: "Instrument Serif", Georgia, serif;
   --font-sans: "Inter Variable", Inter, system-ui, sans-serif;

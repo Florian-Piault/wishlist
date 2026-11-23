@@ -1,7 +1,9 @@
 ---
 // Une ligne de la liste : toute la ligne est le lien marchand, ouvert dans un
 // nouvel onglet. Vignette à gauche, titre et note au centre, prix à droite.
-// Le texte du YAML passe par `{…}` : Astro l'échappe.
+// Le texte du YAML passe par `{…}` : Astro l'échappe. La vignette est la
+// photo de l'élément s'il en a une, l'icône de sa catégorie sinon.
+import { Picture } from "astro:assets";
 import ArrowUpRight from "@lucide/astro/icons/arrow-up-right";
 import Star from "@lucide/astro/icons/star";
 import type { CategoryIconName } from "../lib/categories";
@@ -15,10 +17,28 @@ interface Props {
 }
 
 const { item, icon } = Astro.props;
+
+// La vignette mesure 64 px (88 px dès 600 px) : la variante de 400 px couvre
+// les écrans jusqu'à ×4, celle de 800 px les zooms et les très hautes densités.
+const THUMB_SIZES = "(min-width: 600px) 88px, 64px";
 ---
 
 <a class="row" href={item.url} target="_blank" rel="noopener noreferrer">
-  <CategoryIcon name={icon} />
+  {item.image ? (
+    <Picture
+      class="photo"
+      src={item.image}
+      alt={item.title}
+      formats={["avif", "webp"]}
+      widths={[400, 800]}
+      width={800}
+      sizes={THUMB_SIZES}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <CategoryIcon name={icon} />
+  )}
   <div class="body">
     {item.priority === "high" && (
       <p class="wish">
@@ -59,6 +79,23 @@ const { item, icon } = Astro.props;
 
   p {
     margin: 0;
+  }
+
+  /* Zone carrée sur fond blanc : le produit reste entier, sans déformation,
+     centré, quel que soit son ratio. `<picture>` reçoit la classe de portée
+     d'Astro, pas la classe `photo`. */
+  picture {
+    display: block;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 6px;
+    background: var(--color-image-bg);
   }
 
   .body {
