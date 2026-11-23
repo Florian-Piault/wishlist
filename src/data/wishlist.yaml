@@ -1,0 +1,41 @@
+# Chaque clé est un slug unique (il sert d'ancre). Un slug doit contenir une
+# lettre : une clé purement numérique (« 2024: ») passerait en tête de liste
+# et fausserait l'ordre du fichier à égalité de prix. Champs :
+#   title (requis), url (requis, http ou https), category (requis :
+#   books, games, tech, home, clothing, misc), price ou range { min, max }
+#   (l'un des deux requis ; price l'emporte si les deux sont remplis),
+#   image (optionnelle, chemin vers src/assets/items/), note, priority: high.
+# Un élément reçu se supprime du fichier.
+# Une catégorie sans élément ne s'affiche pas.
+
+jojolion-27:
+  title: JoJolion, tome 27
+  url: https://www.ludum.fr/mangas/jojo-s-jojolion-tome-27-1008794
+  price: 7.29
+  note: Dernier tome de JoJolion (Delcourt), édition standard.
+  image: ../assets/items/jojolion-27.jpg
+  category: books
+
+jojolands:
+  title: The JoJolands, premiers tomes
+  url: https://www.fnac.com/a19344210/Jojo-S-Bizarre-Adventure-The-Jojolands-T01-Hirohiko-Araki
+  price: 7.29
+  note: Prix par tome. À lire dans l'ordre à partir du tome 1 (Delcourt).
+  image: ../assets/items/jojolands-01.jpg
+  category: books
+
+oneblade-lame:
+  title: Lame de rechange OneBlade 1st Shave, anti-friction
+  url: https://www.philips.fr/c-p/QP215_50/oneblade-anti-friction
+  price: 14.99
+  note: Référence QP215/50 (une lame).
+  image: ../assets/items/oneblade-lame.jpg
+  category: misc
+
+polaire-ski:
+  title: Pull ou polaire chaude pour le ski
+  url: https://www.decathlon.fr/p/polaire-chaude-de-randonnee-homme-nh500-noir/304984/c382m8526050
+  range: { min: 30, max: 50 }
+  note: Par exemple la polaire Quechua NH500 de Decathlon, autour de 40 €.
+  image: ../assets/items/polaire-nh500.jpg
+  category: clothing

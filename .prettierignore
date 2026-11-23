@@ -1,0 +1,5 @@
+dist/
+.astro/
+pnpm-lock.yaml
+# Plan de travail, rédigé hors du code et conservé tel quel.
+.plan/

@@ -1,0 +1,28 @@
+---
+// Squelette commun à toutes les pages. Le site n'est pas indexé : la meta
+// robots remplace un robots.txt, sans effet sous /wishlist/.
+// Polices auto-hébergées (paquets Fontsource) : Vite copie les fichiers dans
+// dist/_astro/ et réécrit leurs URL sous le `base`.
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
+import "@fontsource-variable/inter/wght.css";
+import "../styles/global.css";
+import ShareMeta from "../components/ShareMeta.astro";
+
+// Seule mention d'année du site, à mettre à jour à chaque saison.
+const title = "Wishlist de Florian pour Noël 2026";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <ShareMeta title={title} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

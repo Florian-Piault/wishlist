@@ -1,0 +1,30 @@
+---
+// Page catalogue : en-tête et synthèse, nav des catégories, une section par
+// groupe. Tri, groupes et synthèse viennent de src/lib/wishlist.ts.
+import { getCollection } from "astro:content";
+import CategoryNav from "../components/CategoryNav.astro";
+import CategorySection from "../components/CategorySection.astro";
+import Layout from "../layouts/Layout.astro";
+import { formatSummary, groupByCategory, summarize } from "../lib/wishlist";
+
+const entries = await getCollection("wishlist");
+const groups = groupByCategory(entries);
+const summary = formatSummary(summarize(entries));
+---
+
+<Layout>
+  <div class="wrap">
+    <header>
+      <h1 class="site-title">
+        Liste des cadeaux de <em>Noël</em> de <em>Florian</em>
+      </h1>
+      <p class="lede">{summary}</p>
+    </header>
+    <CategoryNav groups={groups} />
+    <main>
+      {groups.map((group, position) => (
+        <CategorySection group={group} position={position} />
+      ))}
+    </main>
+  </div>
+</Layout>

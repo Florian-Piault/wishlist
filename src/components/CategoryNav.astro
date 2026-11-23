@@ -1,0 +1,56 @@
+---
+// Nav des catégories, collante en CSS : une pastille par groupe (libellé et
+// nombre d'éléments), qui défile seule à l'horizontale sur mobile.
+import { anchorHref } from "../lib/paths";
+import type { CategoryGroup } from "../lib/wishlist";
+
+interface Props {
+  groups: CategoryGroup[];
+}
+
+const { groups } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav aria-label="Catégories">
+  {groups.map((group) => (
+    <a href={anchorHref(base, group.category)}>
+      {group.label}
+      <span class="visually-hidden">, </span>
+      <span class="count">{group.count}</span>
+    </a>
+  ))}
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    gap: 6px;
+    margin: 24px -16px 0;
+    padding: 10px 16px;
+    overflow-x: auto;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    scrollbar-width: none;
+  }
+
+  a {
+    flex: none;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--color-chip);
+    font-size: 0.85rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Couleur du texte, pas « secondaire » : le gris sur la pastille passe
+     sous le contraste AA à cette taille. */
+  .count {
+    margin-left: 4px;
+    color: var(--color-text);
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+// Icône Lucide d'une catégorie, en SVG inline au build. Décorative : le titre
+// de l'élément suffit, les lecteurs d'écran l'ignorent.
+import Book from "@lucide/astro/icons/book";
+import Gamepad2 from "@lucide/astro/icons/gamepad-2";
+import Gift from "@lucide/astro/icons/gift";
+import House from "@lucide/astro/icons/house";
+import Monitor from "@lucide/astro/icons/monitor";
+import Shirt from "@lucide/astro/icons/shirt";
+import type { CategoryIconName } from "../lib/categories";
+
+interface Props {
+  name: CategoryIconName;
+}
+
+const ICONS = {
+  book: Book,
+  "gamepad-2": Gamepad2,
+  monitor: Monitor,
+  house: House,
+  shirt: Shirt,
+  gift: Gift,
+} satisfies Record<CategoryIconName, unknown>;
+
+const Icon = ICONS[Astro.props.name];
+---
+
+<div class="thumb">
+  <Icon aria-hidden="true" stroke-width={1.75} />
+</div>
+
+<style>
+  .thumb {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: var(--color-placeholder);
+    color: var(--color-muted);
+    font-size: 24px;
+  }
+
+  /* Le SVG est rendu par Lucide, hors de la portée de ce composant. */
+  .thumb :global(svg) {
+    width: 1em;
+    height: 1em;
+  }
+</style>

@@ -5,7 +5,7 @@
 ## Principes
 
 - Chaque lot laisse une application qui démarre (`pnpm dev`) et apporte quelque chose d'utilisable ou de vérifiable.
-- **Commande de vérification** : un lot est terminé quand `pnpm check` passe en local. Ce script, posé en L0, enchaîne `prettier --check .`, `astro check` et `astro build`, exactement comme la CI.
+- **Commande de vérification** : un lot est terminé quand `pnpm check` passe en local. Ce script, posé en L0, enchaîne `prettier --check .`, `astro check` et `astro build`, exactement comme la CI. Le dossier `.plan/` est hors Prettier (`.prettierignore`).
 - **Seams de test** : aucun test automatisé (choix de la spec). Les garde-fous sont dans la chaîne de build : le schéma Zod refuse une donnée invalide, le helper `image()` une image manquante, `astro check` les types, Prettier le formatage. Une règle de données se prouve donc en cassant volontairement `src/data/wishlist.yaml` et en constatant l'échec de `pnpm check`, puis en rétablissant le fichier. Le rendu se vérifie à la main au dev server, en clair et en sombre, en largeur mobile et bureau.
 - **Règles avant écrans** : le schéma, les catégories (ordre, libellés, icônes), le tri, le prix effectif et la synthèse sont posés en L1, dans `src/content.config.ts` et `src/lib/`, avant la page qui les affiche. Les lots d'écran ne recalculent rien : ils lisent les fonctions de `src/lib/wishlist.ts`.
 - **Fichiers disjoints** : le workflow (L2) vit dans `.github/`, le partage (L5) dans `src/components/ShareMeta.astro` et `public/`, les règles (L1) dans `src/content.config.ts`, `src/data/` et `src/lib/`. Le seul point chaud est `src/layouts/Layout.astro` : L3 y ajoute les polices et la feuille de style, L5 une ligne `<ShareMeta />`. Ces deux modifications restent courtes.
@@ -148,7 +148,7 @@ Vagues possibles : L0, puis **L1, L2 et L5 en parallèle**, puis L3, puis L4. L3
 **Objectif** : le lien partagé s'affiche avec un titre et un sapin dans les messageries, et l'onglet porte une étoile. Spec : « Partage et favicon », user stories 19 et 20.
 
 - `public/favicon.svg` : icône Lucide `star` en rouge d'accent `#B3262E`.
-- `public/og.png` : PNG 1200 × 630, icône Lucide `tree-pine` en vert sapin `#24563F` centrée sur `#FBFAF7`. Généré une fois par `scripts/og-image.mjs` (avec `sharp`, déjà présent via Astro) et versionné ; le script reste dans le dépôt pour le régénérer.
+- `public/og.png` : PNG 1200 × 630, icône Lucide `tree-pine` en vert sapin `#24563F` centrée sur `#FBFAF7`. Généré une fois par `scripts/og-image.mjs` (avec `sharp` et `lucide-static`, ajoutés en devDependencies : `sharp` n'est pas résolvable depuis la racine via Astro) et versionné ; le script reste dans le dépôt pour le régénérer.
 - `src/components/ShareMeta.astro` : `og:title` « Wishlist de Florian pour Noël 2026 », `og:type` `website`, `og:locale` `fr_FR`, `og:url` et `og:image` en URL absolues construites depuis `Astro.site` et `BASE_URL`, `twitter:card` `summary_large_image`, `<link rel="icon" type="image/svg+xml">` sous le `base`.
 - Une ligne `<ShareMeta />` dans le `<head>` de `Layout.astro`.
 

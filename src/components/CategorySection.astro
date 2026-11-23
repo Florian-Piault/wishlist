@@ -1,0 +1,64 @@
+---
+// Section d'une catégorie : numéro en petites capitales rouges, libellé en
+// serif, puis les éléments déjà triés. L'ancre est la valeur de catégorie ;
+// celle d'un élément est son slug préfixé par « item- », pour ne jamais
+// heurter une ancre de section.
+import { formatSectionNumber, type CategoryGroup } from "../lib/wishlist";
+import ItemRow from "./ItemRow.astro";
+
+interface Props {
+  group: CategoryGroup;
+  position: number;
+}
+
+const { group, position } = Astro.props;
+---
+
+<section id={group.category}>
+  <h2>
+    <small>{formatSectionNumber(position)}</small>
+    <span class="visually-hidden">, </span>
+    {group.label}
+  </h2>
+  <ul>
+    {group.entries.map((entry) => (
+      <li id={`item-${entry.id}`}>
+        <ItemRow item={entry.data} icon={group.icon} />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  section {
+    padding-top: 28px;
+  }
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 4px;
+    font-family: var(--font-serif);
+    font-size: 1.9rem;
+    font-weight: 400;
+  }
+
+  small {
+    color: var(--color-accent);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li + li {
+    border-top: 1px solid var(--color-line);
+  }
+</style>
