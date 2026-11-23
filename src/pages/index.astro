@@ -16,9 +16,9 @@ const summary = formatSummary(summarize(entries));
   <div class="wrap">
     <header>
       <h1 class="site-title">
-        Liste de <em>Noël</em>
+        Liste des cadeaux de <em>Noël</em> de <em>Florian</em>
       </h1>
-      <p class="lede">{summary} · Prix indicatifs</p>
+      <p class="lede">{summary}</p>
     </header>
     <CategoryNav groups={groups} />
     <main>
@@ -26,6 +26,5 @@ const summary = formatSummary(summarize(entries));
         <CategorySection group={group} position={position} />
       ))}
     </main>
-    <footer class="site-footer">Joyeux Noël.</footer>
   </div>
 </Layout>
