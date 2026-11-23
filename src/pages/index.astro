@@ -1,8 +1,37 @@
 ---
-// Page provisoire du socle : remplacée par le catalogue en L3.
+// Page provisoire de L1 : affiche en HTML brut les règles de tri et la
+// synthèse pour les vérifier. Remplacée par le catalogue en L3.
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import {
+  formatItemPrice,
+  formatSummary,
+  groupByCategory,
+  summarize,
+} from "../lib/wishlist";
+
+const entries = await getCollection("wishlist");
+const groups = groupByCategory(entries);
+const summary = formatSummary(summarize(entries));
 ---
 
 <Layout>
   <h1>Liste de Noël</h1>
+  <p>{summary} · Prix indicatifs</p>
+  {groups.map((group) => (
+    <section id={group.category}>
+      <h2>
+        {group.label} ({group.count})
+      </h2>
+      <ul>
+        {group.entries.map((entry) => (
+          <li id={entry.id}>
+            {entry.data.priority === "high" && "★ Très envie — "}
+            {entry.data.title} — {formatItemPrice(entry.data)}
+            {entry.data.note && <small> ({entry.data.note})</small>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>

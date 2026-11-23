@@ -1,0 +1,81 @@
+# Liste d'exemple : à remplacer par la vraie liste.
+# Chaque clé est un slug unique (il sert d'ancre). Un slug doit contenir une
+# lettre : une clé purement numérique (« 2024: ») passerait en tête de liste
+# et fausserait l'ordre du fichier à égalité de prix. Champs :
+#   title (requis), url (requis, http ou https), category (requis :
+#   books, games, tech, home, clothing, misc), price ou range { min, max }
+#   (l'un des deux requis ; price l'emporte si les deux sont remplis),
+#   image (optionnelle, chemin vers src/assets/items/), note, priority: high.
+# Un élément reçu se supprime du fichier.
+# La catégorie « clothing » est laissée vide exprès : elle ne s'affiche pas.
+
+roman-policier:
+  title: Le dernier roman de Fred Vargas
+  url: https://www.example.com/livres/vargas
+  price: 22.5
+  category: books
+
+bd-integrale:
+  title: Intégrale Astérix
+  url: https://www.example.com/livres/asterix
+  range: { min: 80, max: 120 }
+  category: books
+
+beau-livre:
+  title: Beau livre sur les phares
+  url: https://www.example.com/livres/phares
+  price: 45
+  priority: high
+  category: books
+
+jeu-cooperatif:
+  title: Jeu coopératif « Les Aventuriers »
+  url: https://www.example.com/jeux/aventuriers
+  price: 35
+  category: games
+
+puzzle:
+  title: Puzzle 1000 pièces
+  url: https://www.example.com/jeux/puzzle
+  price: 12
+  category: games
+
+jeu-de-cartes:
+  title: Jeu de cartes rapide
+  url: https://www.example.com/jeux/cartes
+  price: 12
+  category: games
+
+casque-audio:
+  title: Casque audio à réduction de bruit
+  url: https://www.example.com/tech/casque
+  price: 299
+  range: { min: 250, max: 380 }
+  image: ../assets/items/casque-audio.jpg
+  category: tech
+
+enceinte:
+  title: Enceinte Bluetooth
+  url: https://www.example.com/tech/enceinte
+  price: 270
+  category: tech
+
+clavier:
+  title: Clavier mécanique
+  url: https://www.example.com/tech/clavier
+  range: { min: 90, max: 150 }
+  note: Disposition <b>AZERTY</b> & switchs silencieux
+  category: tech
+
+theiere:
+  title: Théière en fonte
+  url: http://www.example.com/maison/theiere
+  price: 49.9
+  category: home
+
+carte-cadeau:
+  title: Carte cadeau librairie
+  url: https://www.example.com/divers/carte
+  range: { min: 20, max: 50 }
+  note: Le montant que vous voulez.
+  category: misc

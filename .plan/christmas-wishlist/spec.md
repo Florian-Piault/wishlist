@@ -175,7 +175,7 @@ Variante « B · Catalogue » du [prototype](prototypes/style-visuel/README.md),
 - Aucun test automatisé : c'est un choix explicite pour un site personnel de cette taille.
 - Les garde-fous viennent de la chaîne de build, rejouée à l'identique en local et en CI :
   - le schéma Zod refuse les données invalides : champ requis manquant, URL non http(s), `min > max`, catégorie inconnue, prix et fourchette absents tous les deux ;
-  - le helper `image()` refuse une image référencée manquante ;
+  - une image référencée manquante est refusée par le schéma, avant le helper `image()` : celui-ci ne la refuse qu'au build, avec un message anglais qui ne nomme pas le champ, alors que la pré-vérification échoue dès `astro check` avec un message français sur `image` ;
   - `astro check` contrôle les types, et `prettier --check` le formatage.
 - La vérification visuelle se fait au dev server avant de publier : ordre des catégories et des éléments, synthèse, badge « Très envie », repli d'icône, mode sombre, affichage mobile.
 - Il n'existe pas encore de tests dans le dépôt, donc aucun antécédent à suivre.
