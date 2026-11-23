@@ -33,9 +33,9 @@ oneblade-lame:
   category: misc
 
 polaire-ski:
-  title: Pull ou polaire chaude pour le ski
-  url: https://www.decathlon.fr/p/polaire-chaude-de-randonnee-homme-nh500-noir/304984/c382m8526050
-  range: { min: 30, max: 50 }
-  note: Par exemple la polaire Quechua NH500 de Decathlon, autour de 40 €.
-  image: ../assets/items/polaire-nh500.jpg
+  title: Polaire sherpa Quechua MH500, noire
+  url: https://www.decathlon.fr/p/polaire-de-randonnee-homme-sherpa-mh500-noir/375770/c382c363c95m9001107
+  price: 39.99
+  note: Polaire de randonnée homme (Decathlon), pour le ski.
+  image: ../assets/items/polaire-mh500.jpg
   category: clothing
