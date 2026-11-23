@@ -1,0 +1,21 @@
+---
+// Métadonnées de partage (Open Graph, Twitter) et favicon. Les URL de partage
+// sont absolues (`site` + `base`) : les messageries ne résolvent pas un chemin
+// relatif. Le titre vient du layout, pour que `og:title` reste égal à `<title>`.
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const pageUrl = new URL(base, Astro.site);
+const imageUrl = new URL("og.png", pageUrl);
+---
+
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:url" content={pageUrl.href} />
+<meta property="og:image" content={imageUrl.href} />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />

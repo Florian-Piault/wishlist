@@ -1,6 +1,10 @@
 ---
 // Squelette commun à toutes les pages. Le site n'est pas indexé : la meta
 // robots remplace un robots.txt, sans effet sous /wishlist/.
+import ShareMeta from "../components/ShareMeta.astro";
+
+// Seule mention d'année du site, à mettre à jour à chaque saison.
+const title = "Wishlist de Florian pour Noël 2026";
 ---
 
 <!doctype html>
@@ -9,7 +13,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Wishlist de Florian pour Noël 2026</title>
+    <title>{title}</title>
+    <ShareMeta title={title} />
   </head>
   <body>
     <slot />

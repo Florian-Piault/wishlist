@@ -148,7 +148,7 @@ Vagues possibles : L0, puis **L1, L2 et L5 en parallèle**, puis L3, puis L4. L3
 **Objectif** : le lien partagé s'affiche avec un titre et un sapin dans les messageries, et l'onglet porte une étoile. Spec : « Partage et favicon », user stories 19 et 20.
 
 - `public/favicon.svg` : icône Lucide `star` en rouge d'accent `#B3262E`.
-- `public/og.png` : PNG 1200 × 630, icône Lucide `tree-pine` en vert sapin `#24563F` centrée sur `#FBFAF7`. Généré une fois par `scripts/og-image.mjs` (avec `sharp`, déjà présent via Astro) et versionné ; le script reste dans le dépôt pour le régénérer.
+- `public/og.png` : PNG 1200 × 630, icône Lucide `tree-pine` en vert sapin `#24563F` centrée sur `#FBFAF7`. Généré une fois par `scripts/og-image.mjs` (avec `sharp` et `lucide-static`, ajoutés en devDependencies : `sharp` n'est pas résolvable depuis la racine via Astro) et versionné ; le script reste dans le dépôt pour le régénérer.
 - `src/components/ShareMeta.astro` : `og:title` « Wishlist de Florian pour Noël 2026 », `og:type` `website`, `og:locale` `fr_FR`, `og:url` et `og:image` en URL absolues construites depuis `Astro.site` et `BASE_URL`, `twitter:card` `summary_large_image`, `<link rel="icon" type="image/svg+xml">` sous le `base`.
 - Une ligne `<ShareMeta />` dans le `<head>` de `Layout.astro`.
 
