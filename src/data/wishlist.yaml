@@ -14,6 +14,7 @@ jojolion-27:
   price: 7.29
   note: Dernier tome de JoJolion (Delcourt), édition standard.
   image: ../assets/items/jojolion-27.jpg
+  priority: high
   category: books
 
 jojolands:
@@ -22,6 +23,7 @@ jojolands:
   price: 7.29
   note: Prix par tome. À lire dans l'ordre à partir du tome 1 (Delcourt).
   image: ../assets/items/jojolands-01.jpg
+  priority: high
   category: books
 
 oneblade-lame:
@@ -38,4 +40,21 @@ polaire-ski:
   price: 39.99
   note: Polaire de randonnée homme (Decathlon), pour le ski.
   image: ../assets/items/polaire-mh500.jpg
+  priority: high
+  category: clothing
+
+tondeuse-nez:
+  title: Tondeuse nez et oreilles BaByliss E650E
+  url: https://www.amazon.fr/dp/B013OPOLXO
+  price: 9
+  note: Fonctionne sur pile, lames en acier inoxydable. Vendue par Amazon.
+  image: ../assets/items/tondeuse-babyliss.jpg
+  category: misc
+
+chaussettes-fila:
+  title: Lot de 6 paires de chaussettes Fila, blanches
+  url: https://www.decathlon.fr/p/mp/lot-de-6-paires-de-chaussettes/8d9df995-e295-4fd8-82bc-54b8abe9813f/c4
+  price: 19.9
+  note: Taille 39/42. Vendu par WEBTEX SAS sur Decathlon (en promo à 16,90 € jusqu'au 5 décembre).
+  image: ../assets/items/chaussettes-fila.jpg
   category: clothing
