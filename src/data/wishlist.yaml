@@ -58,3 +58,14 @@ chaussettes-fila:
   note: Taille 39/42. Vendu par WEBTEX SAS sur Decathlon (en promo à 16,90 € jusqu'au 5 décembre).
   image: ../assets/items/chaussettes-fila.jpg
   category: clothing
+
+ecran-oled:
+  title: Écran PC OLED 27 pouces, 1440p, 240 Hz
+  url: https://www.ldlc.com/recherche/oled%2027%20240/
+  range:
+    min: 340
+    max: 600
+  note: >-
+    Pour rêver un peu. Si vous vous cotisez à dix, ça passe. N'importe quel
+    modèle OLED ou QD-OLED en 2560 × 1440, 240 Hz, HDR True Black 400.
+  category: tech
